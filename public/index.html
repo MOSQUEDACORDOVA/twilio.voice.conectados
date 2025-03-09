@@ -3,15 +3,22 @@
   <head>
     <title>Twilio Voice JavaScript SDK Quickstart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="site.css?v=1" />
+    <link rel="stylesheet" href="assets/css/site.css?v=1" />
     <meta http-equiv="Permissions-Policy" content="microphone=(self)">
   </head>
   <body>
-    <header>
-      <h1>Twilio Voice JavaScript SDK Quickstart</h1>
+    <main id="controls" class="main-container">
       <button id="startup-button">Start up the Device</button>
-    </header>
-    <main id="controls">
+      <div class="top-bar">
+        <button class="button-bar" id="device-button">
+          <img src="assets/img/audio.png" alt="" class="icon">
+          <span>Device</span>
+        </button>
+        <button class="arrow-button">
+          <img src="assets/img/arrow.png" alt="" class="icon">
+        </button>
+      </div>
+
       <section class="left-column" id="info">
         <h2>Your Device Info</h2>
         <div id="client-name"></div>
@@ -24,26 +31,72 @@
           <button id="get-devices">Seeing "Unknown" devices?</button>
         </div>
       </section>
-      <section class="center-column">
-        <h2 class="instructions">Make a Call</h2>
-        <div id="call-controls" class="hide">
+
+      <section class="center-column show" id="call">
+        <!-- <h2 class="instructions">Make a Call</h2> -->
+        <div id="call-controls" class="call-controls">
           <form>
-            <label for="phone-number"
+            <!-- <label for="phone-number"
               >Enter a phone number or client name</label
-            >
-            <input id="phone-number" type="text" placeholder="+15552221234" />
-            <button id="button-call" type="submit">Call</button>
+            > -->
+            <input id="phone-number" class="phone-number" type="text" placeholder="Introducir un número..." />
+            <div class="container-pad">
+              <div class="call-pad">
+                <button class="key" type="button">1</button>
+                <button class="key" type="button">2</button>
+                <button class="key" type="button">3</button>
+                <button class="key" type="button">4</button>
+                <button class="key" type="button">5</button>
+                <button class="key" type="button">6</button>
+                <button class="key" type="button">7</button>
+                <button class="key" type="button">8</button>
+                <button class="key" type="button">9</button>
+                <button class="key" type="button">#</button>
+                <button class="key" type="button">0</button>
+                <button class="key" type="button">+</button>
+              </div>
+            </div>
+
+            <button id="button-call" class="button-call" type="submit">
+              <img src="assets/img/phone.png" alt="">
+              <span>Iniciar Llamada</span>
+            </button>
           </form>
-          <button id="button-hangup-outgoing" class="hide">Hang Up</button>
-          <div id="incoming-call" class="hide">
-            <h2>Incoming Call Controls</h2>
+
+          <div class="container-call hide">
             <p class="instructions">
-              Incoming Call from <span id="incoming-number"></span>
+              <span></span>
+              <span id="call-number"></span>
+              <span id="time-call">Llamando</span>
             </p>
-            <button id="button-accept-incoming">Accept</button>
-            <button id="button-reject-incoming">Reject</button>
-            <button id="button-hangup-incoming" class="hide">Hangup</button>
+
+            <button id="button-hangup-outgoing" class="button-call">
+              <img src="assets/img/phone-call-off.png" alt="">
+              <span>Finalizar Llamada</span>
+            </button>
           </div>
+
+          <div id="incoming-call" class="hide">
+            <!-- <h2>Incoming Call Controls</h2> -->
+            <p class="instructions">
+              <span>Nueva Llamada</span>
+              <span id="incoming-number"></span>
+              <span id="time-incoming-call">Llamando</span>
+            </p>
+            <button id="button-accept-incoming" class="button-call">
+              <img src="assets/img/phone-call.png" alt="">
+              <span>Contestar</span>
+            </button>
+            <button id="button-reject-incoming" class="button-call hide">
+              <img src="assets/img/phone-call-off.png" alt="">
+              <span>Finalizar Llamada</span>
+            </button>
+            <button id="button-hangup-incoming" class="button-call hide">
+              <img src="assets/img/phone-call-off.png" alt="">
+              <span>Finalizar Llamada</span>
+            </button>
+          </div>
+
           <div id="volume-indicators" class="hide">
             <label>Mic Volume</label>
             <div id="input-volume"></div>
@@ -53,14 +106,25 @@
           </div>
         </div>
       </section>
-      <section class="right-column">
+
+      <section class="right-column" id="log">
         <h2>Event Log</h2>
         <div class="hide" id="log"></div>
       </section>
+      
+      <div class="bottom-bar">
+        <button class="button-bar" id="log-button">
+          <img src="assets/img/log-info.png" alt="" class="icon">
+          <span>Logs</span>
+        </button>
+        <button class="arrow-button">
+          <img src="assets/img/arrow.png" alt="" class="icon">
+        </button>
+      </div>
     </main>
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript" src="twilio.min.js"></script>
-    <script src="quickstart.js"></script>
+    <script type="text/javascript" src="assets/js/twilio.min.js"></script>
+    <script src="assets/js/quickstart.js"></script>
   </body>
 </html>

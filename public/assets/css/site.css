@@ -1,0 +1,364 @@
+﻿@import url(https://fonts.googleapis.com/css?family=Share+Tech+Mono);
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+p {
+  padding: 0;
+  margin: 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+h2 {
+  font-family: "Inter", sans-serif;
+  margin-top: 0;
+  /* border-bottom: 1px solid black; */
+}
+
+input:focus {
+  outline: none;
+}
+
+button {
+  background-color: unset;
+  border: unset;
+  padding: unset;
+  cursor: pointer;
+}
+
+label {
+  text-align: left;
+  font-size: 1.25em;
+  /* color: #777776; */
+  display: block;
+}
+
+header {
+  text-align: center;
+}
+
+main {
+  /* padding: 3em; */
+  max-width: 1200px;
+  margin: 0 auto;
+  /* display: flex;
+  justify-content: space-between;
+  align-items: flex-start; */
+}
+
+.left-column,
+.center-column,
+.right-column {
+  /* width: 30%;
+  min-width: 16em;
+  margin: 0 1.5em; */
+  text-align: center;
+}
+
+/* Left Column */
+#client-name {
+  text-align: left;
+  margin-bottom: 1em;
+  font-family: "Helvetica Light", Helvetica, sans-serif;
+  font-size: 1.25em;
+  /* color: #777776; */
+}
+
+select {
+  width: 300px;
+  height: 120px;
+  margin-bottom: 10px;
+}
+
+/* Center Column */
+input {
+  font-family: Helvetica-LightOblique, Helvetica, sans-serif;
+  font-style: oblique;
+  /* font-size: 1em; */
+  width: 100%;
+  /* height: 2.5em; */
+  padding: 0;
+  display: block;
+  margin: 10px 0;
+}
+
+div#volume-indicators {
+  padding: 10px;
+  margin-top: 20px;
+  width: 500px;
+  text-align: left;
+}
+
+div#volume-indicators > div {
+  display: block;
+  height: 20px;
+  width: 0;
+}
+
+/* Right Column */
+.right-column {
+  /* padding: 0 1.5em; */
+}
+
+#log {
+  text-align: left;
+  border: 1px solid #686865;
+  padding: 10px;
+  /* height: 9.5em; */
+  overflow-y: scroll;
+}
+
+.log-entry {
+  color: #686865;
+  font-family: "Share Tech Mono", "Courier New", Courier, fixed-width;
+  font-size: 1.25em;
+  line-height: 1.25em;
+  margin-left: 1em;
+  text-indent: -1.25em;
+  width: 90%;
+}
+
+/* Other Styles */
+.hide {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+@media (orientation: portrait) {
+  /* main {
+    flex-direction: column;
+    align-items: center;
+  } */
+
+  .left-column,
+  .center-column,
+  .right-column {
+    width: 100%;
+  }
+}
+
+.main-container {
+  position: relative;
+  height: 100vh;
+}
+
+#startup-button {
+  display: none;
+}
+
+.left-column , .center-column , .right-column {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  padding: 20px 10px;
+  height: calc(100% - 100px);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  z-index: 0;
+  transition: .3s ease all;
+  /* background: rgb(190, 189, 189); */
+}
+
+.show {
+  opacity: 1;
+  z-index: 1;
+}
+
+.top-bar, .bottom-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #000;
+  padding: 0 10px;
+}
+
+.bottom-bar {
+  top: unset;
+  bottom: 0;
+  border-top: 1px solid #000;
+  border-bottom: 0px solid #000;
+}
+
+.button-bar {
+  display: flex;
+  align-items: center;
+  /* background: red; */
+  height: 50px;
+}
+
+.button-bar span {
+  color: #000;
+  font-family: "Inter", sans-serif;
+  font-size: 13px; 
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.button-bar, .arrow-button {
+  /* margin: 0 10px; */
+}
+
+.arrow-button {
+  /* width: 50px; */
+  height: 50px;
+  /* padding: 10px; */
+  /* background: green; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-call {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+  border-radius: 45px;
+  background: #000;
+  margin: 0 auto;
+}
+
+#button-hangup-outgoing, #button-reject-incoming, #button-hangup-incoming {
+  background-color: #F54A4A;
+  color: #fff;
+}
+
+#button-accept-incoming {
+  position: absolute;
+  bottom: 0px;
+  background-color: #00AB8F;
+  color: #fff;
+}
+
+.button-call span {
+  font-size: 24px;
+  font-weight: 300;
+  font-family: "Inter", sans-serif;
+  color: #fff;
+  margin-left: 10px;
+}
+
+.phone-number {
+  font-family: "Inter", sans-serif;
+  border: unset;
+  width: 100%;
+  font-size: 20px;
+  max-width: 400px;
+  margin: auto;
+  text-align: center;
+  font-style: normal;
+}
+
+.call-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.container-call {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+}
+
+.container-pad {
+  margin: 25px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.call-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 80px);
+  gap: 15px;
+}
+
+.key {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: #EFEFF3;
+  font-family: "Inter", sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  transition: 0.3s ease all;
+}
+
+.key:hover {
+  background-color: #e5e5e9;
+}
+
+.key:active {
+  background-color: #dfd9d9;
+}
+
+.instructions {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+}
+
+.instructions span:nth-child(1) {
+  font-size: 32px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+}
+
+.instructions span:nth-child(2) {
+  font-size: 36px;
+  font-weight: 700;
+  font-family: "Inter", sans-serif;
+  margin: 10px 0;
+}
+
+.instructions span:nth-child(3) {
+  font-size: 24px;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+}
+
+#incoming-call {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+}
+
+.container-call .button-call {
+  position: absolute;
+  bottom: 0;
+}

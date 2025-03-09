@@ -112,6 +112,7 @@
 
       // Twilio.Device.connect() returns a Call object
       const call = await device.connect({ params });
+      $('#call-number').text(params.To);
 
       // add listeners to the Call
       // "accepted" means the call has finished connecting and the state is now "open"
@@ -132,16 +133,18 @@
   function updateUIAcceptedOutgoingCall(call) {
     log("Call in progress ...");
     callButton.disabled = true;
-    outgoingCallHangupButton.classList.remove("hide");
-    volumeIndicators.classList.remove("hide");
+    $('#call-controls form').addClass('hide');
+    outgoingCallHangupButton.parentElement.classList.remove("hide");
+    // volumeIndicators.classList.remove("hide");
     bindVolumeIndicators(call);
   }
 
   function updateUIDisconnectedOutgoingCall() {
     log("Call disconnected.");
     callButton.disabled = false;
-    outgoingCallHangupButton.classList.add("hide");
-    volumeIndicators.classList.add("hide");
+    $('#call-controls form').removeClass('hide');
+    outgoingCallHangupButton.parentElement.classList.add("hide");
+    // volumeIndicators.classList.add("hide");
   }
 
   // HANDLE INCOMING CALL
@@ -150,6 +153,7 @@
     log(`Incoming call from ${call.parameters.From}`);
 
     //show incoming call div and incoming phone number
+    $('#call-controls form').addClass('hide');
     incomingCallDiv.classList.remove("hide");
     incomingPhoneNumberEl.innerHTML = call.parameters.From;
 
@@ -179,6 +183,7 @@
 
     //update UI
     log("Accepted incoming call.");
+    $('#time-incoming-call').text('En Curso...');
     incomingCallAcceptButton.classList.add("hide");
     incomingCallRejectButton.classList.add("hide");
     incomingCallHangupButton.classList.remove("hide");
@@ -189,6 +194,7 @@
   function rejectIncomingCall(call) {
     call.reject();
     log("Rejected incoming call");
+    $('#time-incoming-call').text('Rechazada...');
     resetIncomingCallUI();
   }
 
@@ -197,6 +203,7 @@
   function hangupIncomingCall(call) {
     call.disconnect();
     log("Hanging up incoming call");
+    $('#time-incoming-call').text('Finalizada...');
     resetIncomingCallUI();
   }
 
@@ -217,7 +224,7 @@
 
   function setClientNameUI(clientName) {
     var div = document.getElementById("client-name");
-    div.innerHTML = `Your client name: <strong>${clientName}</strong>`;
+    div.innerHTML = `<p>Your client name: <strong>${clientName}</strong></p>`;
   }
 
   function resetIncomingCallUI() {
@@ -226,6 +233,7 @@
     incomingCallRejectButton.classList.remove("hide");
     incomingCallHangupButton.classList.add("hide");
     incomingCallDiv.classList.add("hide");
+    $('#call-controls form').removeClass('hide');
   }
 
   // AUDIO CONTROLS
@@ -303,4 +311,58 @@
       selectEl.appendChild(option);
     });
   }
+  
+  function initFuncButtons() {
+    const $phoneNumberInput = $('#phone-number');
+    const $keys = $('.key');
+  
+    $keys.on('click', function() {
+      $phoneNumberInput.val($phoneNumberInput.val() + $(this).text());
+    });
+  
+    const $deviceButton = $('#device-button');
+    const $callDiv = $('#call');
+    const $logButton = $('#log-button');
+    const $infoDiv = $('#info');
+    const $logDiv = $('#log');
+    const $topArrowButton = $('.top-bar .arrow-button');
+    const $bottomArrowButton = $('.bottom-bar .arrow-button');
+  
+    function hideAllDivs() {
+      $callDiv.removeClass('show');
+      $infoDiv.removeClass('show');
+      $logDiv.removeClass('show');
+    }
+  
+    function showCallDivIfNoneVisible() {
+      if (!$infoDiv.hasClass('show') && !$logDiv.hasClass('show')) {
+        $callDiv.addClass('show');
+      }
+    }
+  
+    $deviceButton.on('click', function() {
+      hideAllDivs();
+      $infoDiv.addClass('show');
+    });
+  
+    $topArrowButton.on('click', function() {
+      $infoDiv.removeClass('show');
+      showCallDivIfNoneVisible();
+    });
+  
+    $logButton.on('click', function() {
+      hideAllDivs();
+      $logDiv.addClass('show');
+    });
+  
+    $bottomArrowButton.on('click', function() {
+      $logDiv.removeClass('show');
+      showCallDivIfNoneVisible();
+    });
+  }
+
+  window.addEventListener('load', () => {
+    startupButton.click();
+    initFuncButtons();
+  });
 });
